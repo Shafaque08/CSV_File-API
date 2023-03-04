@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Downloading CSV files</title>
+</head>
+
+<body>
+    <textarea name="" id="data" cols="30" rows="10"></textarea>
+    <button onclick="downloadCSV()">Download CSV File</button>
+</body>
+<script>
+    function downloadCSV() {
+        const blob = new Blob([document.getElementById('data').value], { type: 'octet-stream' })
+        const href = URL.createObjectURL(blob)
+
+        const a = Object.assign(document.createElement('a'), {
+            href: href,
+            style: 'display:none',
+            download: 'data.csv'
+        })
+
+        document.body.appendChild(a)
+
+        a.click()
+
+        URL.revokeObjectURL(href);
+        alert('Your file has been downloaded!'); 
+            a.remove()
+    }
+    
+</script>
+
+</html>
